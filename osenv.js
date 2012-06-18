@@ -1,5 +1,4 @@
 var isWindows = process.platform === 'win32'
-console.error('isWindows = %j', isWindows, process.platform)
 var windir = isWindows ? process.env.windir || 'C:\\Windows' : null
 var path = require('path')
 var exec = require('child_process').exec
