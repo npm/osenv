@@ -74,3 +74,7 @@ memo('editor', function () {
          (isWindows ? 'notepad.exe' : 'vi')
 })
 
+memo('shell', function () {
+  return isWindows ? process.env.ComSpec || 'cmd'
+         : process.env.SHELL || 'bash'
+})

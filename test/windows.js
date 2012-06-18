@@ -24,6 +24,7 @@ process.env.Path = 'C:\\Program Files\\;C:\\Binary Stuff\\bin'
 process.env.PROMPT = '(o_o) $ '
 process.env.EDITOR = 'edit'
 process.env.VISUAL = 'visualedit'
+process.env.ComSpec = 'some-com'
 
 tap.test('basic windows sanity test', function (t) {
   var osenv = require('../osenv.js')
@@ -70,6 +71,12 @@ tap.test('basic windows sanity test', function (t) {
   delete require.cache[require.resolve('../osenv.js')]
   var osenv = require('../osenv.js')
   t.equal(osenv.editor(), 'notepad.exe')
+
+  t.equal(osenv.shell(), 'some-com')
+  process.env.ComSpec = ''
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  t.equal(osenv.shell(), 'cmd')
 
   t.end()
 })

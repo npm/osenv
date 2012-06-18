@@ -56,3 +56,8 @@ executables.
 Return the executable name of the editor program.  This uses the EDITOR
 and VISUAL environment variables, and falls back to `vi` on Unix, or
 `notepad.exe` on Windows.
+
+## osenv.shell()
+
+The SHELL on Unix, which Windows calls the ComSpec.  Defaults to 'bash'
+or 'cmd'.

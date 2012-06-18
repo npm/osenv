@@ -21,6 +21,7 @@ process.env.PATH = '/opt/local/bin:/usr/local/bin:/usr/bin/:bin'
 process.env.PS1 = '(o_o) $ '
 process.env.EDITOR = 'edit'
 process.env.VISUAL = 'visualedit'
+process.env.SHELL = 'zsh'
 
 
 tap.test('basic unix sanity test', function (t) {
@@ -64,6 +65,12 @@ tap.test('basic unix sanity test', function (t) {
   delete require.cache[require.resolve('../osenv.js')]
   var osenv = require('../osenv.js')
   t.equal(osenv.editor(), 'vi')
+
+  t.equal(osenv.shell(), 'zsh')
+  process.env.SHELL = ''
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  t.equal(osenv.shell(), 'bash')
 
   t.end()
 })
