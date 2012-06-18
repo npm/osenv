@@ -69,3 +69,9 @@ memo('path', function () {
           process.env.path).split(isWindows ? ';' : ':')
 })
 
+memo('editor', function () {
+  return process.env.EDITOR ||
+         process.env.VISUAL ||
+         (isWindows ? 'notepad.exe' : 'vi')
+})
+

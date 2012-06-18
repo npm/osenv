@@ -50,3 +50,9 @@ No place like it.
 
 An array of the places that the operating system will search for
 executables.
+
+## osenv.editor() 
+
+Return the executable name of the editor program.  This uses the EDITOR
+and VISUAL environment variables, and falls back to `vi` on Unix, or
+`notepad.exe` on Windows.

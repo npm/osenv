@@ -22,6 +22,8 @@ process.env.TMP = 'C:\\tmp'
 process.env.TEMP = 'C:\\temp'
 process.env.Path = 'C:\\Program Files\\;C:\\Binary Stuff\\bin'
 process.env.PROMPT = '(o_o) $ '
+process.env.EDITOR = 'edit'
+process.env.VISUAL = 'visualedit'
 
 tap.test('basic windows sanity test', function (t) {
   var osenv = require('../osenv.js')
@@ -57,6 +59,17 @@ tap.test('basic windows sanity test', function (t) {
   var osenv = require('../osenv.js')
   osenv.home = function () { return null }
   t.equal(osenv.tmpdir(), 'C:\\windows\\temp')
+
+  t.equal(osenv.editor(), 'edit')
+  process.env.EDITOR = ''
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  t.equal(osenv.editor(), 'visualedit')
+
+  process.env.VISUAL = ''
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  t.equal(osenv.editor(), 'notepad.exe')
 
   t.end()
 })
