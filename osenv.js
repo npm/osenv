@@ -2,6 +2,7 @@ var isWindows = process.platform === 'win32'
 var windir = isWindows ? process.env.windir || 'C:\\Windows' : null
 var path = require('path')
 var exec = require('child_process').exec
+var os = require('os')
 
 // looking up envs is a bit costly.
 // Also, sometimes we want to have a fallback
@@ -46,6 +47,10 @@ memo('hostname', function () {
 }, 'hostname')
 
 memo('tmpdir', function () {
+  if (os.tmpdir)
+    return os.tmpdir()
+
+  // old node versions
   var t = isWindows ? 'temp' : 'tmp'
   return process.env.TMPDIR ||
          process.env.TMP ||

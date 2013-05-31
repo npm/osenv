@@ -11,8 +11,9 @@ if (process.platform !== 'win32') {
 
 // load this before clubbing the platform name.
 var tap = require('tap')
+var os = require('os')
 
-process.env.windir = 'C:\\windows'
+process.env.windir = 'c:\\windows'
 process.env.USERDOMAIN = 'some-domain'
 process.env.USERNAME = 'sirUser'
 process.env.USERPROFILE = 'C:\\Users\\sirUser'
@@ -27,8 +28,6 @@ process.env.VISUAL = 'visualedit'
 process.env.ComSpec = 'some-com'
 
 tap.test('basic windows sanity test', function (t) {
-  var osenv = require('../osenv.js')
-
   var osenv = require('../osenv.js')
 
   t.equal(osenv.user(),
@@ -50,16 +49,19 @@ tap.test('basic windows sanity test', function (t) {
   var osenv = require('../osenv.js')
   t.equal(osenv.tmpdir(), process.env.TEMP)
 
-  process.env.TEMP = ''
-  delete require.cache[require.resolve('../osenv.js')]
-  var osenv = require('../osenv.js')
-  t.equal(osenv.tmpdir(), 'C:\\Users\\sirUser\\temp')
+  // switch for old node versions
+  if (!os.tmpdir) {
+    process.env.TEMP = ''
+    delete require.cache[require.resolve('../osenv.js')]
+    var osenv = require('../osenv.js')
+    t.equal(osenv.tmpdir(), 'C:\\Users\\sirUser\\temp')
+  }
 
   process.env.TEMP = ''
   delete require.cache[require.resolve('../osenv.js')]
   var osenv = require('../osenv.js')
   osenv.home = function () { return null }
-  t.equal(osenv.tmpdir(), 'C:\\windows\\temp')
+  t.equal(osenv.tmpdir(), 'c:\\windows\\temp')
 
   t.equal(osenv.editor(), 'edit')
   process.env.EDITOR = ''
