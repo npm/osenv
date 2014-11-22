@@ -19,6 +19,7 @@ process.env.TMP = '/tmp'
 process.env.TEMP = '/temp'
 process.env.PATH = '/opt/local/bin:/usr/local/bin:/usr/bin/:bin'
 process.env.PS1 = '(o_o) $ '
+process.env.CUSTOM_EDITOR = 'custom_edit'
 process.env.EDITOR = 'edit'
 process.env.VISUAL = 'visualedit'
 process.env.SHELL = 'zsh'
@@ -51,6 +52,18 @@ tap.test('basic unix sanity test', function (t) {
   t.equal(osenv.tmpdir(), '/tmp')
 
   t.equal(osenv.editor(), 'edit')
+
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  osenv.setCustomEditorVariable('CUSTOM_EDITOR')
+  t.equal(osenv.editor(), 'custom_edit')
+
+  process.env.CUSTOM_EDITOR = ''
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  osenv.setCustomEditorVariable('CUSTOM_EDITOR')
+  t.equal(osenv.editor(), 'edit')
+
   process.env.EDITOR = ''
   delete require.cache[require.resolve('../osenv.js')]
   var osenv = require('../osenv.js')

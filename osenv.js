@@ -3,6 +3,11 @@ var path = require('path')
 var exec = require('child_process').exec
 var os = require('os')
 
+var customEditor = ''
+exports.setCustomEditorVariable = function(val) {
+  customEditor = val
+}
+
 // looking up envs is a bit costly.
 // Also, sometimes we want to have a fallback
 // Pass in a callback to wait for the fallback on failures
@@ -62,7 +67,8 @@ memo('path', function () {
 })
 
 memo('editor', function () {
-  return process.env.EDITOR ||
+  return process.env[customEditor] ||
+         process.env.EDITOR ||
          process.env.VISUAL ||
          (isWindows ? 'notepad.exe' : 'vi')
 })

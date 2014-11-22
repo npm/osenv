@@ -22,6 +22,7 @@ process.env.TMP = 'C:\\tmp'
 process.env.TEMP = 'C:\\temp'
 process.env.Path = 'C:\\Program Files\\;C:\\Binary Stuff\\bin'
 process.env.PROMPT = '(o_o) $ '
+process.env.CUSTOM_EDITOR = 'custom_edit'
 process.env.EDITOR = 'edit'
 process.env.VISUAL = 'visualedit'
 process.env.ComSpec = 'some-com'
@@ -55,6 +56,18 @@ tap.test('basic windows sanity test', function (t) {
   t.equal(osenv.tmpdir(), 'c:\\windows\\temp')
 
   t.equal(osenv.editor(), 'edit')
+
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  osenv.setCustomEditorVariable('CUSTOM_EDITOR')
+  t.equal(osenv.editor(), 'custom_edit')
+
+  process.env.CUSTOM_EDITOR = ''
+  delete require.cache[require.resolve('../osenv.js')]
+  var osenv = require('../osenv.js')
+  osenv.setCustomEditorVariable('CUSTOM_EDITOR')
+  t.equal(osenv.editor(), 'edit')
+
   process.env.EDITOR = ''
   delete require.cache[require.resolve('../osenv.js')]
   var osenv = require('../osenv.js')
