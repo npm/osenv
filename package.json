@@ -12,10 +12,7 @@
   "scripts": {
     "test": "tap test/*.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/isaacs/osenv"
-  },
+  "repository": "https://github.com/npm/osenv",
   "keywords": [
     "environment",
     "variable",
