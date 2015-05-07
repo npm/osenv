@@ -5,7 +5,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "os-tmpdir": "^1.0.0"
+  },
   "devDependencies": {
     "tap": "~0.4.9"
   },
