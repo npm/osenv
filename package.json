@@ -23,6 +23,6 @@
     "ps1"
   ],
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
-  "license": "BSD",
+  "license": "ISC",
   "description": "Look up environment settings specific to different operating systems"
 }
