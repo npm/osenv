@@ -24,10 +24,10 @@ function memo (key, lookup, fallback) {
     }
     exports[key] = function (cb) {
       if (cb) process.nextTick(cb.bind(null, null, val))
-      return val
+      else if (!fallback) return val
     }
     if (cb && !falling) process.nextTick(cb.bind(null, null, val))
-    return val
+    if (!cb && !fallback) return val
   }
 }
 

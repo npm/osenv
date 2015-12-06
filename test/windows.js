@@ -28,10 +28,9 @@ process.env.ComSpec = 'some-com'
 tap.test('basic windows sanity test', function (t) {
   var osenv = require('../osenv.js')
 
-  t.equal(osenv.user(),
-          process.env.USERDOMAIN + '\\' + process.env.USERNAME)
+  t.equal(osenv.user(), undefined)
+  t.equal(osenv.hostname(), undefined)
   t.equal(osenv.home(), process.env.USERPROFILE)
-  t.equal(osenv.hostname(), process.env.COMPUTERNAME)
   t.same(osenv.path(), process.env.Path.split(';'))
   t.equal(osenv.prompt(), process.env.PROMPT)
   t.equal(osenv.tmpdir(), process.env.TMPDIR)
@@ -70,5 +69,13 @@ tap.test('basic windows sanity test', function (t) {
   var osenv = require('../osenv.js')
   t.equal(osenv.shell(), 'cmd')
 
-  t.end()
+  osenv.user(function (err, user) {
+    t.equal(err, null)
+    t.equal(user, process.env.USERDOMAIN + '\\' + process.env.USERNAME)
+    osenv.hostname(function (err, hostname) {
+      t.equal(err, null)
+      t.equal(hostname, process.env.COMPUTERNAME)
+      t.end()
+    })
+  })
 })
