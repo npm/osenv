@@ -6,7 +6,7 @@ if (process.platform === 'win32') {
   console.log('TAP Version 13\n' +
               '1..0\n' +
               '# Skip unix tests, this is not unix\n')
-  return
+  process.exit(0)
 }
 var tap = require('tap')
 
