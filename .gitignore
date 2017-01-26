@@ -9,5 +9,6 @@ npm-debug.log
 coverage.html
 .idea
 lib-cov
+*.tap
 
 node_modules
