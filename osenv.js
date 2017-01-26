@@ -57,7 +57,7 @@ memo('home', function () {
 memo('path', function () {
   return (process.env.PATH ||
           process.env.Path ||
-          process.env.path).split(isWindows ? ';' : ':')
+          process.env.path).split(path.delimiter)
 })
 
 memo('editor', function () {
