@@ -11,3 +11,5 @@ coverage.html
 lib-cov
 
 node_modules
+.nyc_output
+coverage
