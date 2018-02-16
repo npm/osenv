@@ -10,7 +10,7 @@
     "os-tmpdir": "^1.0.0"
   },
   "devDependencies": {
-    "tap": "^8.0.1"
+    "tap": "^11.1.0"
   },
   "scripts": {
     "test": "tap test/*.js"
