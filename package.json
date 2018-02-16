@@ -1,6 +1,6 @@
 {
   "name": "osenv",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "osenv.js",
   "directories": {
     "test": "test"
