@@ -6,7 +6,6 @@
     "test": "test"
   },
   "dependencies": {
-    "os-homedir": "^1.0.0",
     "os-tmpdir": "^1.0.0"
   },
   "devDependencies": {
