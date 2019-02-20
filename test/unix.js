@@ -26,9 +26,9 @@ process.env.SHELL = 'zsh'
 tap.test('basic unix sanity test', function (t) {
   var osenv = require('../osenv.js')
 
-  t.equal(osenv.user(), process.env.USER)
+  t.equal(osenv.user(), undefined)
+  t.equal(osenv.hostname(), undefined)
   t.equal(osenv.home(), process.env.HOME)
-  t.equal(osenv.hostname(), process.env.HOSTNAME)
   t.same(osenv.path(), process.env.PATH.split(':'))
   t.equal(osenv.prompt(), process.env.PS1)
   t.equal(osenv.tmpdir(), process.env.TMPDIR)
@@ -67,5 +67,13 @@ tap.test('basic unix sanity test', function (t) {
   var osenv = require('../osenv.js')
   t.equal(osenv.shell(), 'bash')
 
-  t.end()
+  osenv.user(function (err, user) {
+    t.equal(err, null)
+    t.equal(user, process.env.USER)
+    osenv.hostname(function (err, hostname) {
+      t.equal(err, null)
+      t.equal(hostname, process.env.HOSTNAME)
+      t.end()
+    })
+  })
 })
