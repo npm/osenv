@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "os-homedir": "^1.0.0",
-    "os-tmpdir": "^1.0.0"
+    "tmpdir-polyfill": "^1.0.0"
   },
   "devDependencies": {
     "tap": "^11.1.0"
