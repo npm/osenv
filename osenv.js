@@ -2,7 +2,7 @@ var isWindows = process.platform === 'win32'
 var path = require('path')
 var exec = require('child_process').exec
 var osTmpdir = require('os-tmpdir')
-var osHomedir = require('os-homedir')
+var osHomedir = require('homedir-polyfill')
 
 // looking up envs is a bit costly.
 // Also, sometimes we want to have a fallback

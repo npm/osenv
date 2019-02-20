@@ -6,7 +6,7 @@
     "test": "test"
   },
   "dependencies": {
-    "os-homedir": "^1.0.0",
+    "homedir-polyfill": "^1.0.1",
     "os-tmpdir": "^1.0.0"
   },
   "devDependencies": {
